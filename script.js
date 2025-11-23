@@ -1,3 +1,26 @@
+// ---- Testdaten hinzufügen, falls leer ----
+if (!localStorage.getItem('weights')) {
+    localStorage.setItem('weights', JSON.stringify([
+        {date: '2025-11-20', value: 75},
+        {date: '2025-11-21', value: 74.5},
+        {date: '2025-11-22', value: 74}
+    ]));
+}
+
+if (!localStorage.getItem('measurements')) {
+    localStorage.setItem('measurements', JSON.stringify([
+        {date: '2025-11-20', waist: 80, hip: 95},
+        {date: '2025-11-21', waist: 79.5, hip: 94.5}
+    ]));
+}
+
+if (!localStorage.getItem('bloodpressure')) {
+    localStorage.setItem('bloodpressure', JSON.stringify([
+        {date: '2025-11-20', sys: 120, dia: 80},
+        {date: '2025-11-21', sys: 118, dia: 78}
+    ]));
+}
+
 // ---- Gewicht speichern ----
 function saveWeight() {
     const value = document.getElementById('weight-input').value;
@@ -82,17 +105,7 @@ function renderWeightChart() {
     const ctx = document.getElementById('weightChart').getContext('2d');
     weightChart = new Chart(ctx, {
         type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Gewicht (kg)',
-                data: values,
-                borderColor: '#007aff',
-                backgroundColor: 'rgba(0,122,255,0.2)',
-                tension: 0.3,
-                fill: true
-            }]
-        },
+        data: { labels: labels, datasets: [{ label: 'Gewicht (kg)', data: values, borderColor: '#007aff', backgroundColor: 'rgba(0,122,255,0.2)', tension: 0.3, fill: true }] },
         options: { responsive: true, scales: { y: { beginAtZero: false } } }
     });
 }
@@ -106,27 +119,7 @@ function renderMeasureChart() {
     const ctx = document.getElementById('measureChart').getContext('2d');
     measureChart = new Chart(ctx, {
         type: 'line',
-        data: {
-            labels: labels,
-            datasets: [
-                {
-                    label: 'Taille (cm)',
-                    data: waistValues,
-                    borderColor: '#ff6384',
-                    backgroundColor: 'rgba(255,99,132,0.2)',
-                    tension: 0.3,
-                    fill: true
-                },
-                {
-                    label: 'Hüfte (cm)',
-                    data: hipValues,
-                    borderColor: '#36a2eb',
-                    backgroundColor: 'rgba(54,162,235,0.2)',
-                    tension: 0.3,
-                    fill: true
-                }
-            ]
-        },
+        data: { labels: labels, datasets: [ { label: 'Taille (cm)', data: waistValues, borderColor: '#ff6384', backgroundColor: 'rgba(255,99,132,0.2)', tension: 0.3, fill: true }, { label: 'Hüfte (cm)', data: hipValues, borderColor: '#36a2eb', backgroundColor: 'rgba(54,162,235,0.2)', tension: 0.3, fill: true } ] },
         options: { responsive: true, scales: { y: { beginAtZero: false } } }
     });
 }
@@ -140,35 +133,17 @@ function renderBPChart() {
     const ctx = document.getElementById('bpChart').getContext('2d');
     bpChart = new Chart(ctx, {
         type: 'line',
-        data: {
-            labels: labels,
-            datasets: [
-                {
-                    label: 'Systolisch',
-                    data: sysValues,
-                    borderColor: '#ff9f40',
-                    backgroundColor: 'rgba(255,159,64,0.2)',
-                    tension: 0.3,
-                    fill: true
-                },
-                {
-                    label: 'Diastolisch',
-                    data: diaValues,
-                    borderColor: '#4bc0c0',
-                    backgroundColor: 'rgba(75,192,192,0.2)',
-                    tension: 0.3,
-                    fill: true
-                }
-            ]
-        },
+        data: { labels: labels, datasets: [ { label: 'Systolisch', data: sysValues, borderColor: '#ff9f40', backgroundColor: 'rgba(255,159,64,0.2)', tension: 0.3, fill: true }, { label: 'Diastolisch', data: diaValues, borderColor: '#4bc0c0', backgroundColor: 'rgba(75,192,192,0.2)', tension: 0.3, fill: true } ] },
         options: { responsive: true, scales: { y: { beginAtZero: false } } }
     });
 }
 
 // ---- Beim Laden alles anzeigen ----
-renderWeights();
-renderMeasurements();
-renderBloodPressure();
-renderWeightChart();
-renderMeasureChart();
-renderBPChart();
+window.addEventListener('DOMContentLoaded', () => {
+    renderWeights();
+    renderMeasurements();
+    renderBloodPressure();
+    renderWeightChart();
+    renderMeasureChart();
+    renderBPChart();
+});

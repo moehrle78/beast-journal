@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mein Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <h1>Mein Fitness Tracker</h1>
+
+    <section class="card">
+        <h2>Gewicht eintragen</h2>
+        <input id="weight-input" type="number" placeholder="Gewicht in kg" step="0.1">
+        <button onclick="saveWeight()">Speichern</button>
+        <ul id="weight-list"></ul>
+    </section>
+
+    <section class="card">
+        <h2>Körpermaße</h2>
+        <input id="waist-input" type="number" placeholder="Taille (cm)" step="0.1">
+        <input id="hip-input" type="number" placeholder="Hüfte (cm)" step="0.1">
+        <button onclick="saveMeasurements()">Speichern</button>
+        <ul id="measure-list"></ul>
+    </section>
+
+    <section class="card">
+        <h2>Blutdruck</h2>
+        <input id="sys-input" type="number" placeholder="Systolisch">
+        <input id="dia-input" type="number" placeholder="Diastolisch">
+        <button onclick="saveBloodPressure()">Speichern</button>
+        <ul id="bp-list"></ul>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
